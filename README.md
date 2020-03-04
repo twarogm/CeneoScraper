@@ -1,4 +1,4 @@
-# CeneoScraper12S
+# CeneoScraper
 ## Etap 1 - pobranie składowych pojedynczej opinii
 - opinia
 - identyfikator
