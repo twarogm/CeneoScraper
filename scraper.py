@@ -1,14 +1,17 @@
 #import bibliotek
 import requests
 from bs4 import BeautifulSoup
-import json
 import pprint
+import json
 
 #adres URL przykładowej strony z opiniami
 url_prefix = 'https://www.ceneo.pl'
-product_id = input('Podaj kod produktu :')
+product_id = input('Podaj kod produktu: ')
 url_postfix = '#tab=reviews'
 url = url_prefix + '/' + product_id + url_postfix
+
+#pusta lista na wszystkie opininie o produkcie
+opinions_list = []
 
 while url:
     #pobranie kodu html strony z podanego URL
@@ -18,13 +21,11 @@ while url:
     #wydobycie z kodu HTML strony fragmentów odpowiadających poszczególnym opiniom
     opinions = page_tree.find_all('li', 'review-box')
 
-    #pusta lista na wszystkie opininie o produkcie
-    opinions_list = []
     #wydobycie składowych dla pojedyńczej opinii
     for opinion in opinions:
 
         opinion_id = opinion['data-entry-id']
-        author = opinion.find('div', 'reviewer-name-line')
+        author = opinion.find('div', 'reviewer-name-line').string
         try:
             recommendation = opinion.find('div', 'product-review-summary').find('em').string
         except AttributeError:
@@ -77,9 +78,9 @@ while url:
         url = None
     print(url)
     
-with open(product_id+'.json', 'w') as fp:
-    json.dump(opinions_list, fp,  ensure_ascii=False, indent=4, separators=(',',': '))
+with open(product_id+'.json', 'w', encoding='utf-8') as fp:
+    json.dump(opinions_list, fp,  ensure_ascii=False, indent=4, separators=(',', ': '))
 
 print(len(opinions_list))
-    #pprint.pprint(opinions_list)
+#pprint.pprint(opinions_list)
         
