@@ -24,6 +24,11 @@
 - przechodzenie po stronach z opiniamii
 - eksport opinii do pliku (.csv lub .xlsx lub .json)
 
-## Etap 4 - 
+## Etap 4 
 - transformacja danych
 - refaktoryzacja kodu
+
+## Etap 5 
+- zapis danych do obiektu dataframe
+- wykonanie podstawowych obliczeń na danych w ramce danych
+- wykonanie prostych wykresów na podstawie danych w ramce danych
