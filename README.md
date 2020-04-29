@@ -39,7 +39,7 @@
         /run.py  
         /config.py  
         /app  
-            /__init__.py
+            /\_\_init\_\_.py
             /views.py  
             /models.py 
             /scraper.py
@@ -52,3 +52,5 @@
         /requirements.txt
         /README
         /.venv
+- widoki(Jinja)
+- routingi
