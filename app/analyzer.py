@@ -5,13 +5,13 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 #wyswietlenie zawartości katalogu z opiniami
-print(*os.listdir('./opinions_json'))
+print(*os.listdir('./app/opinions_json'))
 
 #wczytanie identyfiaktora produktu, którego opinie będą analizowane
 product_id = input('Podaj kod produktu: ')
 
 #wczytanie do ramki danych opinii z pliku
-opinions = pd.read_json('./opinions_json/'+product_id+'.json')
+opinions = pd.read_json('./app/opinions_json/'+product_id+'.json')
 opinions = opinions.set_index('opinion_id')
 
 opinions['stars'] = opinions['stars'].map(lambda x: float(x.split('/')[0].replace(',','.')))
@@ -24,7 +24,7 @@ plt.xticks(rotation=0)
 ax.set_title('Ilość danych ocen')
 ax.set_xlabel('Liczba gwiazdek')
 ax.set_ylabel('Liczba opinii')
-plt.savefig('./figures_png/'+product_id+'_bar.png')
+plt.savefig('./app/static/figures_png/'+product_id+'_bar.png')
 plt.close()
 
 #udział poszczególnych rekomendacji w ogólnej liczbie opinii
@@ -32,7 +32,7 @@ recommendation = opinions['recommendation'].value_counts()
 fig, ax = plt.subplots()
 recommendation.plot.pie(label = '', autopct= '%.1f%%', colors = ['darkorange', 'bisque'])
 ax.set_title('Rekomendacje')
-plt.savefig('./figures_png/'+product_id+'_pie.png')
+plt.savefig('./app/static/figures_png/'+product_id+'_pie.png')
 plt.close()
 
 #podstawowe statystki
