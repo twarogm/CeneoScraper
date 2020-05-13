@@ -1,7 +1,10 @@
+#import bibliotek
+import requests
 from app import app
 from flask import render_template, request, redirect, url_for
 from flaskext.markdown import Markdown
 from app.forms import ProductForm
+from app.models import Opinion, Product
 Markdown(app)
 
 app.config['SECRET_KEY'] = 'TajemniczyMysiSprzęt'
@@ -23,11 +26,16 @@ def extract():
     form = ProductForm()
     if form.validate_on_submit():
         product_id = form.product_id.data
-        
-        return redirect(url_for('product', id=product_id))
+        page_respons = requests.get('https://www.ceneo.pl/'+product_id)
+        if page_respons.status_code == requests.codes['ok']:
+            product = Product(product_id)
+            product.extract_product
+            return redirect(url_for('product', id=product_id))
+        else:
+            form.product_id.errors.append('Podana wartość nie jest poprawnym kodym produktu w serwisie Ceneo.')
     return render_template('extract.html', form=form)
 
-@app.route('/product/<int:id>')
+@app.route('/product/<id>')
 def product(id):
     pass
 

@@ -35,22 +35,23 @@
 
 ## Etap 6 - przygotowanie interfesju webowego aplikacji (Flask)
 - struktura aplikacji
-    /CeneoScraper  
-        /run.py  
-        /config.py  
-        /app  
-            /\_\_init\_\_.py
-            /views.py  
-            /models.py 
-            /scraper.py
-            /analyzer.py
-            /opinions_json 
-            /static/  
-                /main.css
-            /templates/  
-                /layout.html  
-        /requirements.txt
-        /README
-        /.venv
+>    /CeneoScraper  
+>>        /run.py  
+>>        /config.py  
+>>        /app/
+>>>            /__init__.py
+>>>            /views.py  
+>>>            /models.py 
+>>>            /scraper.py
+>>>            /analyzer.py
+>>>            /opinions_json 
+>>>            /static/ 
+>>>>                /figures_png
+>>>>                /main.css
+>>>            /templates/  
+>>>>                /layout.html  
+>>        /requirements.txt
+>>        /README
+>>        /.venv/
 - widoki(Jinja)
 - routingi
