@@ -5,6 +5,7 @@ from flask import render_template, request, redirect, url_for
 from flaskext.markdown import Markdown
 from app.forms import ProductForm
 from app.models import Opinion, Product
+import pandas as pd
 Markdown(app)
 
 app.config['SECRET_KEY'] = 'TajemniczyMysiSprzęt'
@@ -37,8 +38,22 @@ def extract():
     return render_template('extract.html', form=form)
 
 @app.route('/product/<id>')
-def product(id):
-    pass
+    def product(id):
+        product = Product(id)
+        product.read_product()
+        opinions = pd.DataFrame.from_records([opinion.__dict__() for opinion in product.opinions])
+        opinions["stars"] = opinions["stars"].map(lambda x: float(x.split("/")[0].replace(",", ".")))
+        return render_template(
+             "product.html",
+            tables=[
+                opinions.to_html(
+                     classes='table table-bordered table-sm table-responsive',
+                    table_id = "opinions",
+                     index = False
+                )
+            ], 
+            titles=opinions.columns.values 
+        )
 
 @app.route('/products')
 def products():
