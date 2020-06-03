@@ -54,7 +54,7 @@ class Product:
                 except TypeError:
                     url = None
    
-   def save_product(self):
+    def save_product(self):
         with open("app/opinions_json/"+self.product_id+'.json', 'w', encoding="utf-8") as fp:
             json.dump(self.__dict__(), fp,  ensure_ascii=False, indent=4, separators=(',', ': '))
     

@@ -1,14 +1,8 @@
-@@ -0,0 +1,14 @@
- {% extends 'layout.html' %}
+{% extends 'layout.html' %}
  {% block body %}
-     {% for table in tables %}
-         {{ table|safe }}
-     {% endfor %}
- {% endblock %}
- {% block scripts %}
- <script>
-     $(document).ready( function () {
-         $('#opinions').DataTable();
-     } );
- </script>
+     <ul class="list-group">
+         {% for product in products %}
+             <li class="list-group-item"><a class="navbar-brand" href="{{ url_for('product',id=product) }}"> {{product}}</a></li>
+         {% endfor %}
+     </ul>
  {% endblock %}
